@@ -549,7 +549,17 @@ PlayerSettings:
   webGLUseEmbeddedResources: 0
   webGLUseWasm: 0
   webGLCompressionFormat: 1
+<<<<<<< HEAD
+  scriptingDefineSymbols:
+    1: CROSS_PLATFORM_INPUT
+    4: CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    7: CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    14: MOBILE_INPUT
+    17: MOBILE_INPUT
+    20: MOBILE_INPUT
+=======
   scriptingDefineSymbols: {}
+>>>>>>> 5463cb4ad37038c15026e9d52a1f50de3105a4b2
   platformArchitecture: {}
   scriptingBackend: {}
   incrementalIl2cppBuild: {}
@@ -632,6 +642,10 @@ PlayerSettings:
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
     Collab: 1
+<<<<<<< HEAD
+    UNet: 1
+=======
+>>>>>>> 5463cb4ad37038c15026e9d52a1f50de3105a4b2
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: 3f6d58a9-a2bf-4fa1-96a9-3a753db3b0a3

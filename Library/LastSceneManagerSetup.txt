@@ -1,1 +1,8 @@
+<<<<<<< HEAD
+sceneSetups:
+- path: Assets/Scenes/James Sandbox.unity
+  isLoaded: 1
+  isActive: 1
+=======
 sceneSetups: []
+>>>>>>> 5463cb4ad37038c15026e9d52a1f50de3105a4b2
