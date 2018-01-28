@@ -6,6 +6,7 @@ using UnityEngine;
 public class CostumeSource : MonoBehaviour {
 
     public string costumeName;
+    public int materialNumber;
 
 	// Use this for initialization
 	void Start () {

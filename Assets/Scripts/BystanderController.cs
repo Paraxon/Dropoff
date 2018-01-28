@@ -10,6 +10,8 @@ public enum BystanderState
     Leaving
 }
 
+[RequireComponent(typeof(Actor))]
+[RequireComponent(typeof(AICharacterControl))]
 public class BystanderController : MonoBehaviour {
 
     public int remainingStops, minStops, maxStops;
@@ -18,19 +20,32 @@ public class BystanderController : MonoBehaviour {
     public float pointRadius = 2.0f;
     public BystanderState currentState;
     Actor actor;
+    AICharacterControl aiController;
+    public GameObject dummyCase;
+    public float dummyCaseProb = 0.25f;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         actor = GetComponent<Actor>();
+        aiController = GetComponent<AICharacterControl>();
+
         actor.Respawn();
+        RandomizeDummyCase();
         remainingStops = Random.Range(minStops, maxStops);
         idlePoint = actor.GetDrop();
-        GetComponent<AICharacterControl>().SetTarget(idlePoint);
+        aiController.SetTarget(idlePoint);
         currentState = BystanderState.Moving;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void RandomizeDummyCase()
+    {
+        float roll = Random.Range(0f, 1f);
+        dummyCase.SetActive(roll < dummyCaseProb);
+    }
+
+    // Update is called once per frame
+    void Update () {
         switch (currentState)
         {
             case BystanderState.Moving:
@@ -38,7 +53,7 @@ public class BystanderController : MonoBehaviour {
                 {
                     remainingStops--;
                     stopDuration = Random.Range(minDuration, maxDuration);
-                    GetComponent<AICharacterControl>().SetTarget(transform);
+                    aiController.SetTarget(transform);
                     currentState = BystanderState.Idle;
                 }
                 break;
@@ -49,13 +64,13 @@ public class BystanderController : MonoBehaviour {
                     if (remainingStops > 0)
                     {
                         idlePoint = actor.GetDrop();
-                        GetComponent<AICharacterControl>().SetTarget(idlePoint);
+                        aiController.SetTarget(idlePoint);
                         currentState = BystanderState.Moving;
                     }
                     else
                     {
                         exitPoint = actor.GetSpawn();
-                        GetComponent<AICharacterControl>().SetTarget(exitPoint);
+                        aiController.SetTarget(exitPoint);
                         currentState = BystanderState.Leaving;
                     }
                 }
@@ -64,9 +79,10 @@ public class BystanderController : MonoBehaviour {
                 if (Vector3.Distance(transform.position, exitPoint.position) < pointRadius)
                 {
                     actor.Respawn();
+                    RandomizeDummyCase();
                     remainingStops = Random.Range(minStops, maxStops);
                     idlePoint = actor.GetDrop();
-                    GetComponent<AICharacterControl>().SetTarget(idlePoint);
+                    aiController.SetTarget(idlePoint);
                     currentState = BystanderState.Moving;
                 }
                 break;

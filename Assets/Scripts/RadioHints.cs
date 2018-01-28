@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class RadioHints : MonoBehaviour {
 
     public GameObject contact;
+    AudioSource audioSource;
     public float timer = 0;
     public float hintInterval = 90;
     public int hintLimit = 2;
@@ -17,6 +19,7 @@ public class RadioHints : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         contact = GameObject.Find("Contact");
+        audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -35,9 +38,8 @@ public class RadioHints : MonoBehaviour {
         lastBriefcase = index;
         string filename = "Briefcase " + index;
         AudioClip hint = Resources.Load<AudioClip>("Audio/Breifcase/"+filename);
-        AudioSource source = GetComponent<AudioSource>();
-        source.Stop();
-        source.PlayOneShot(hint);
+        audioSource.Stop();
+        audioSource.PlayOneShot(hint);
     }
 
     public void GiveHint(string filename)
@@ -46,10 +48,8 @@ public class RadioHints : MonoBehaviour {
         timer = 0;
         Debug.Log("Giving hint '" + filename + "'");
         AudioClip hint = Resources.Load<AudioClip>("Audio/Hints/"+filename);
-
-        AudioSource source = GetComponent<AudioSource>();
-        source.Stop();
-        source.PlayOneShot(hint);
+        audioSource.Stop();
+        audioSource.PlayOneShot(hint);
     }
 
     public void Reset()

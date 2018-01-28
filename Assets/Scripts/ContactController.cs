@@ -13,12 +13,12 @@ public enum ContactState
     Leaving
 }
 
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(AICharacterControl))]
+[RequireComponent(typeof(Inventory))]
 public class ContactController : MonoBehaviour {
 
     public ContactState currentState;
-    public Transform dropoffPoint, exitPoint;
-    public GameObject package;
+    Transform dropoffPoint, exitPoint;
     public float stateTimer = 0.0f;
     public float maxTime = 3.0f;
     public bool triggeredFlag = false;
@@ -27,10 +27,19 @@ public class ContactController : MonoBehaviour {
     public float pointRadius = 0.25f;
     public bool recieving = true;
     Actor actor;
+    AICharacterControl aiController;
+    Inventory inventory;
+    RadioHints radio;
+    GameObject player, package;
 
 	// Use this for initialization
 	void Start () {
         actor = GetComponent<Actor>();
+        aiController = GetComponent<AICharacterControl>();
+        inventory = GetComponent<Inventory>();
+        radio = GameObject.Find("Radio").GetComponent<RadioHints>();
+        player = GameObject.Find("Player");
+        package = GameObject.Find("Package");
         Respawn();
 	}
 	
@@ -39,21 +48,20 @@ public class ContactController : MonoBehaviour {
         switch (currentState)
         {
             case ContactState.Arriving:
-                if (!recieving && GetComponent<Inventory>().IsEmpty())
+                if (!recieving && inventory.IsEmpty())
                 {
                     Leave();
-                    GameObject.Find("Radio").GetComponent<RadioHints>().OnPickup();
+                    radio.OnPickup();
                 }
                 if (Vector3.Distance(transform.position, dropoffPoint.position) < pointRadius)
                     Wait();
                 break;
             case ContactState.Waiting:
-                if (!recieving && GetComponent<Inventory>().IsEmpty())
+                if (!recieving && inventory.IsEmpty())
                 {
                     Leave();
-                    GameObject.Find("Radio").GetComponent<RadioHints>().OnPickup();
+                    radio.OnPickup();
                 }
-                GameObject player = GameObject.Find("Player");
                 float distance = Vector3.Distance(transform.position, player.transform.position);
                 if (triggeredFlag && distance < visibilityRadius)
                     Alert();
@@ -69,14 +77,14 @@ public class ContactController : MonoBehaviour {
                 }
                 else
                 {
-                    GetComponent<Inventory>().DropItem();
-                    Leave();
+                   inventory.DropItem();
+                   Leave();
                 }
                 break;
             case ContactState.PickingUp:
                 if (Vector3.Distance(transform.position, package.transform.position) < pickupRadius)
                 {
-                    GetComponent<Inventory>().PickUp(package);
+                    inventory.PickUp(package);
                     Leave();
                 }
                 break;
@@ -92,15 +100,20 @@ public class ContactController : MonoBehaviour {
         }
     }
 
+    public void Trigger(Transform player)
+    {
+        triggeredFlag = Vector3.Distance(transform.position, player.position) < visibilityRadius;
+    }
+
     private void Respawn()
     {
         actor.Respawn();
-        GameObject.Find("Radio").GetComponent<RadioHints>().Reset();
+        radio.Reset();
 
         dropoffPoint = actor.GetDrop();
         exitPoint = actor.GetSpawn();
 
-        GetComponent<AICharacterControl>().SetTarget(dropoffPoint);
+        aiController.SetTarget(dropoffPoint);
         currentState = ContactState.Arriving;
     }
 
@@ -111,7 +124,7 @@ public class ContactController : MonoBehaviour {
 
     private void PickUp()
     {
-        GetComponent<AICharacterControl>().SetTarget(package.transform);
+        aiController.SetTarget(package.transform);
         currentState = ContactState.PickingUp;
     }
 
@@ -129,7 +142,7 @@ public class ContactController : MonoBehaviour {
 
     private void Leave()
     {
-        GetComponent<AICharacterControl>().SetTarget(exitPoint);
+        aiController.SetTarget(exitPoint);
         currentState = ContactState.Leaving;
     }
 

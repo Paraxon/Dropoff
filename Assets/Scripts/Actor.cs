@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Actor : MonoBehaviour {
 
+    Transform costumes;
+
 	// Use this for initialization
 	void Start () {
-		
+        costumes = transform.Find("Costumes");
 	}
 	
 	// Update is called once per frame
@@ -19,15 +21,51 @@ public class Actor : MonoBehaviour {
         Transform spawn = GetSpawn();
         transform.SetPositionAndRotation(spawn.position, spawn.rotation);
         ShuffleCostume();
+        ShuffleMaterial();
     }
 
     public void ShuffleCostume()
     {
-        Transform costumes = transform.Find("Costumes");
         foreach (Transform costume in costumes)
             costume.gameObject.SetActive(false);
         int index = Random.Range(0, costumes.childCount);
         costumes.GetChild(index).gameObject.SetActive(true);
+    }
+
+    public void ShuffleMaterial()
+    {
+        foreach (Transform costume in costumes)
+        {
+            if (costume.gameObject.activeInHierarchy)
+            {
+                int index = Random.Range(1, 4);
+                string source = "Polygon Characters/Materials/Polygon_City_Characters_Mat_0" + index + "_A";
+                Material newMat = Resources.Load<Material>(source);
+                SkinnedMeshRenderer renderer = costume.GetComponent<SkinnedMeshRenderer>();
+                renderer.material = newMat;
+                break;
+            }
+        }
+        
+    }
+
+    public void SetCostume(string name, int material)
+    {
+        foreach (Transform costume in costumes)
+        {
+            if (costume.name == name)
+            {
+                costume.gameObject.SetActive(true);
+                string source = "Polygon Characters/Materials/Polygon_City_Characters_Mat_0" + material + "_A";
+                Material newMat = Resources.Load<Material>(source);
+                SkinnedMeshRenderer renderer = costume.GetComponent<SkinnedMeshRenderer>();
+                renderer.material = newMat;
+            }
+            else
+            {
+                costume.gameObject.SetActive(false);
+            }
+        }
     }
 
     public Transform GetDrop()
