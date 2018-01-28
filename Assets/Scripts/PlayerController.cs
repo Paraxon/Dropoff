@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
     Inventory inventory;
     Actor actor;
     public float minHeat, heatDecay, maxHeat;
-    public float walkHeat, runHeat, jumpHeat, idleHeat, triggerHeat, currentHeat, heatDuration, heatDecayRate, heatTimer;
+    public float walkHeat, runHeat, jumpHeat, idleHeat, triggerHeat, currentHeat, heatDuration, heatTimer;
     Animator animator;
     AnimationCurve heatCooldown;
 
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour {
         heatTimer = Mathf.Max(heatTimer - Time.deltaTime, 0f);
         heatTimer = Mathf.Min(heatTimer, maxHeat);
         if (heatTimer <=0)
-            currentHeat = Mathf.Max(currentHeat - heatDecayRate * Time.deltaTime, minHeat);
+            currentHeat = Mathf.Max(currentHeat - heatDecay * Time.deltaTime, minHeat);
 	}
 
     void OnTriggerStay(Collider other)

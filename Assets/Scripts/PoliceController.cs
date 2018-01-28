@@ -22,7 +22,6 @@ public class PoliceController : MonoBehaviour {
     Transform patrolPoint;
     public PoliceState currentState;
     Actor actor;
-    public LayerMask sightMask;
     AICharacterControl aiController;
     NavMeshAgent navAgent;
 
@@ -90,7 +89,7 @@ public class PoliceController : MonoBehaviour {
 
     private void GameOver()
     {
-        Debug.Log("Game Over!");
+        GameObject.Find("Canvas").GetComponent<GUIManager>().OnGameOver();
     }
 
     private void Patrol()
@@ -113,6 +112,6 @@ public class PoliceController : MonoBehaviour {
             return false;
         if (direction.magnitude > visibilityRadius)
             return false;
-        return !Physics.Raycast(transform.position, direction, visibilityRadius, sightMask);
+        return true;
     }
 }
