@@ -5,11 +5,14 @@ using UnityEngine;
 public class Actor : MonoBehaviour {
 
     Transform costumes;
+    Transform drops, spawns;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Awake () {
         costumes = transform.Find("Costumes");
-	}
+        drops = GameObject.Find("Drops").transform;
+        spawns = GameObject.Find("Spawns").transform;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -70,14 +73,12 @@ public class Actor : MonoBehaviour {
 
     public Transform GetDrop()
     {
-        Transform drops = GameObject.Find("Drops").transform;
         int index = Random.Range(0, drops.childCount);
         return drops.GetChild(index);
     }
 
     public Transform GetSpawn()
     {
-        Transform spawns = GameObject.Find("Spawns").transform;
         int index = Random.Range(0, spawns.childCount);
         return spawns.GetChild(index);
     }
