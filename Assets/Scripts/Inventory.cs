@@ -39,4 +39,9 @@ public class Inventory : MonoBehaviour {
             currentItem = null;
         }
     }
+
+    public bool IsEmpty()
+    {
+        return currentItem == null;
+    }
 }
