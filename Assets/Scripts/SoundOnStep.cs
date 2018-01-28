@@ -6,12 +6,11 @@ public class SoundOnStep : MonoBehaviour {
 
 	void PlaySound() {
 		int i = Random.Range (1, 7);
-		GetComponent<AudioSource>().clip = Resources.Load ("Audio/concrete " + i) as AudioClip;
+		GetComponent<AudioSource>().clip = Resources.Load ("Audio/Footsteps/Concrete/concrete " + i) as AudioClip;
 		GetComponent<AudioSource> ().Play ();
 	}
 
 	void OnTriggerEnter(Collider other) {
-
 		PlaySound ();
 	}
 
