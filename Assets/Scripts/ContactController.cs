@@ -26,9 +26,11 @@ public class ContactController : MonoBehaviour {
     public float visibilityRadius = 2.5f;
     public float pointRadius = 0.25f;
     public bool recieving = true;
+    Actor actor;
 
 	// Use this for initialization
 	void Start () {
+        actor = GetComponent<Actor>();
         Respawn();
 	}
 	
@@ -92,13 +94,11 @@ public class ContactController : MonoBehaviour {
 
     private void Respawn()
     {
-        ShuffleCostume();
+        actor.Respawn();
         GameObject.Find("Radio").GetComponent<RadioHints>().Reset();
 
-        Transform spawn = GetSpawn();
-        transform.SetPositionAndRotation(spawn.position, spawn.rotation);
-        dropoffPoint = GetDrop();
-        exitPoint = GetSpawn();
+        dropoffPoint = actor.GetDrop();
+        exitPoint = actor.GetSpawn();
 
         GetComponent<AICharacterControl>().SetTarget(dropoffPoint);
         currentState = ContactState.Arriving;
@@ -131,29 +131,6 @@ public class ContactController : MonoBehaviour {
     {
         GetComponent<AICharacterControl>().SetTarget(exitPoint);
         currentState = ContactState.Leaving;
-    }
-
-    public Transform GetDrop()
-    {
-        Transform drops = GameObject.Find("Drops").transform;
-        int index = Random.Range(0, drops.childCount);
-        return drops.GetChild(index);
-    }
-
-    public Transform GetSpawn()
-    {
-        Transform spawns = GameObject.Find("Spawns").transform;
-        int index = Random.Range(0, spawns.childCount);
-        return spawns.GetChild(index);
-    }
-
-    public void ShuffleCostume()
-    {
-        Transform costumes = transform.Find("Costumes");
-        foreach (Transform costume in costumes)
-            costume.gameObject.SetActive(false);
-        int index = Random.Range(0, costumes.childCount);
-        costumes.GetChild(index).gameObject.SetActive(true);
     }
 
     void Respond()

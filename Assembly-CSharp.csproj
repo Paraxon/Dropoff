@@ -51,8 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BystanderController.cs" />
-     <Compile Include="Assets\RadioHints.cs" />
+     <Compile Include="Assets\Scripts\Actor.cs" />
+     <Compile Include="Assets\Scripts\BystanderController.cs" />
      <Compile Include="Assets\Scripts\ContactController.cs" />
      <Compile Include="Assets\Scripts\CostumeSource.cs" />
      <Compile Include="Assets\Scripts\HintGiver.cs" />
@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Police.cs" />
      <Compile Include="Assets\Scripts\Profile.cs" />
+     <Compile Include="Assets\Scripts\RadioHints.cs" />
      <Compile Include="Assets\Scripts\SoundOnStep.cs" />
      <None Include="Assets\Resources\Polygon City\Change_Log.txt" />
      <None Include="Assets\Resources\Raw Mocap Data\Animations\_CompleteAnimationList.txt" />
