@@ -19,8 +19,8 @@ public class RadioHints : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        contact = GameObject.Find("Contact");
-<<<<<<< HEAD
+		contact = GameObject.Find("Contact");
+
 		GameObject[] hintGivers = new GameObject[GameObject.FindGameObjectsWithTag ("HintGiver").Length];
 		int i = 0;
 		foreach (GameObject HintGiver in GameObject.FindGameObjectsWithTag("HintGiver")) {
@@ -28,9 +28,6 @@ public class RadioHints : MonoBehaviour {
 			i++;
 		}
 		SetHintGivers (hintGivers, contact.GetComponent<Profile>().GetHints());
-=======
-        audioSource = GetComponent<AudioSource>();
->>>>>>> 3f8e564f9deb51fd60389da13d401e80e9de41b4
 	}
 	
 	// Update is called once per frame
