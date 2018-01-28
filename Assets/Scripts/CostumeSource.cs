@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Equipment : MonoBehaviour {
+[RequireComponent(typeof(Collider))]
+public class CostumeSource : MonoBehaviour {
+
+    public string costumeName;
 
 	// Use this for initialization
 	void Start () {
@@ -13,9 +16,4 @@ public class Equipment : MonoBehaviour {
 	void Update () {
 		
 	}
-
-    void OnTriggerStay(Collider other)
-    {
-        
-    }
 }
