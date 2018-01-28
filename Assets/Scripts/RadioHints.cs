@@ -13,10 +13,18 @@ public class RadioHints : MonoBehaviour {
     public string[] hints;
     public int briefcaseLines = 10;
     public int lastBriefcase = -1;
+	public GameObject[] hintGivers = new GameObject[10];
 
 	// Use this for initialization
 	void Start () {
         contact = GameObject.Find("Contact");
+		GameObject[] hintGivers = new GameObject[GameObject.FindGameObjectsWithTag ("HintGiver").Length];
+		int i = 0;
+		foreach (GameObject HintGiver in GameObject.FindGameObjectsWithTag("HintGiver")) {
+			hintGivers [i] = HintGiver;
+			i++;
+		}
+		SetHintGivers (hintGivers, contact.GetComponent<Profile>().GetHints());
 	}
 	
 	// Update is called once per frame
@@ -52,11 +60,42 @@ public class RadioHints : MonoBehaviour {
         source.PlayOneShot(hint);
     }
 
+	GameObject[] reshuffle(GameObject[] gameobjects)
+	{
+		for (int t = 0; t < gameobjects.Length; t++ )
+		{
+			GameObject tmp = gameobjects[t];
+			int r = UnityEngine.Random.Range(t, gameobjects.Length);
+			gameobjects[t] = gameobjects[r];
+			gameobjects[r] = tmp;
+		}
+		return gameobjects;
+	}
+
+	public void SetHintGivers(GameObject[] HintGivers, string[] Hints) {
+		foreach (GameObject HintGiver in HintGivers) {
+			HintGiver.GetComponent<HintGiver> ().ReceiveHint ("");
+			HintGiver.GetComponent<HintGiver>().enabled = false;
+			HintGiver.GetComponent<Light> ().enabled = false;
+		}
+		hintGivers = reshuffle (HintGivers);
+		int h = 0;
+		while (h < 3) {
+			HintGivers[h].GetComponent<HintGiver>().enabled = true;
+			HintGivers[h].GetComponent<Light> ().enabled = true;
+
+			HintGivers [h].GetComponent<HintGiver> ().ReceiveHint (Hints [h + 2]);
+			h++;
+		}
+	}
+
     public void Reset()
     {
         timer = 0f;
         hintsGiven = 0;
         hints = contact.GetComponent<Profile>().GetHints();
+		SetHintGivers (hintGivers, hints);
+
         //foreach (string hint in hints) Debug.Log(hint);
     }
 }
