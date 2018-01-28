@@ -2,37 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Actor))]
+[RequireComponent(typeof(Inventory))]
 public class PlayerController : MonoBehaviour {
+
+    ContactController contact;
+    Inventory inventory;
+    Actor actor;
 
     // Use this for initialization
     void Start () {
-        
+        contact = GameObject.Find("Contact").GetComponent<ContactController>();
+        inventory = GetComponent<Inventory>();
+        actor = GetComponent<Actor>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetButtonDown("Drop"))
-            GetComponent<Inventory>().DropItem();
+            inventory.DropItem();
         if (Input.GetButtonDown("Trigger"))
-        {
-            GameObject contact = GameObject.Find("Contact");
-            contact.GetComponent<ContactController>().triggeredFlag = true;
-            Debug.Log("Triggering Contact");
-        }
+            contact.Trigger(transform);
 	}
 
     void OnTriggerStay(Collider other)
     {
         CostumeSource source = other.GetComponent<CostumeSource>();
         if (source != null && Input.GetButtonDown("Interact"))
-            SwapCostume(source.costumeName);
+            actor.SetCostume(source.costumeName, source.materialNumber);
         else if (other.tag == "Item" && Input.GetButtonDown("Interact"))
-            GetComponent<Inventory>().PickUp(other.gameObject);
-    }
-
-    void SwapCostume(string costumeName)
-    {
-        foreach (Transform child in transform)
-            child.gameObject.SetActive(child.name == costumeName);
+            inventory.PickUp(other.gameObject);
     }
 }

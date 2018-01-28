@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class RadioHints : MonoBehaviour {
 
     public GameObject contact;
+    AudioSource audioSource;
     public float timer = 0;
     public float hintInterval = 90;
     public int hintLimit = 2;
@@ -18,6 +20,7 @@ public class RadioHints : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         contact = GameObject.Find("Contact");
+<<<<<<< HEAD
 		GameObject[] hintGivers = new GameObject[GameObject.FindGameObjectsWithTag ("HintGiver").Length];
 		int i = 0;
 		foreach (GameObject HintGiver in GameObject.FindGameObjectsWithTag("HintGiver")) {
@@ -25,6 +28,9 @@ public class RadioHints : MonoBehaviour {
 			i++;
 		}
 		SetHintGivers (hintGivers, contact.GetComponent<Profile>().GetHints());
+=======
+        audioSource = GetComponent<AudioSource>();
+>>>>>>> 3f8e564f9deb51fd60389da13d401e80e9de41b4
 	}
 	
 	// Update is called once per frame
@@ -43,9 +49,8 @@ public class RadioHints : MonoBehaviour {
         lastBriefcase = index;
         string filename = "Briefcase " + index;
         AudioClip hint = Resources.Load<AudioClip>("Audio/Breifcase/"+filename);
-        AudioSource source = GetComponent<AudioSource>();
-        source.Stop();
-        source.PlayOneShot(hint);
+        audioSource.Stop();
+        audioSource.PlayOneShot(hint);
     }
 
     public void GiveHint(string filename)
@@ -54,10 +59,8 @@ public class RadioHints : MonoBehaviour {
         timer = 0;
         Debug.Log("Giving hint '" + filename + "'");
         AudioClip hint = Resources.Load<AudioClip>("Audio/Hints/"+filename);
-
-        AudioSource source = GetComponent<AudioSource>();
-        source.Stop();
-        source.PlayOneShot(hint);
+        audioSource.Stop();
+        audioSource.PlayOneShot(hint);
     }
 
 	GameObject[] reshuffle(GameObject[] gameobjects)
