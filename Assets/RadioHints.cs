@@ -11,6 +11,8 @@ public class RadioHints : MonoBehaviour {
     public int hintLimit = 2;
     public int hintsGiven = 0;
     public string[] hints;
+    public int briefcaseLines = 10;
+    public int lastBriefcase = -1;
 
 	// Use this for initialization
 	void Start () {
@@ -21,15 +23,33 @@ public class RadioHints : MonoBehaviour {
 	void Update () {
         timer += Time.deltaTime;
         if (timer >= hintInterval && hintsGiven < hintLimit)
-        {
-            GiveHint();
-            hintsGiven++;
-        }
+            GiveHint(hints[hintsGiven]);
 	}
 
-    public void GiveHint()
+    public void OnPickup()
     {
-        
+        int index;
+        do
+            index = UnityEngine.Random.Range(0, briefcaseLines);
+        while (index == lastBriefcase);
+        lastBriefcase = index;
+        string filename = "Briefcase " + index;
+        AudioClip hint = Resources.Load<AudioClip>("Audio/Breifcase/"+filename);
+        AudioSource source = GetComponent<AudioSource>();
+        source.Stop();
+        source.PlayOneShot(hint);
+    }
+
+    public void GiveHint(string filename)
+    {
+        hintsGiven++;
+        timer = 0;
+        Debug.Log("Giving hint '" + filename + "'");
+        AudioClip hint = Resources.Load<AudioClip>("Audio/Hints/"+filename);
+
+        AudioSource source = GetComponent<AudioSource>();
+        source.Stop();
+        source.PlayOneShot(hint);
     }
 
     public void Reset()
@@ -37,5 +57,6 @@ public class RadioHints : MonoBehaviour {
         timer = 0f;
         hintsGiven = 0;
         hints = contact.GetComponent<Profile>().GetHints();
+        //foreach (string hint in hints) Debug.Log(hint);
     }
 }

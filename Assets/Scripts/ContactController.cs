@@ -38,13 +38,19 @@ public class ContactController : MonoBehaviour {
         {
             case ContactState.Arriving:
                 if (!recieving && GetComponent<Inventory>().IsEmpty())
+                {
                     Leave();
+                    GameObject.Find("Radio").GetComponent<RadioHints>().OnPickup();
+                }
                 if (Vector3.Distance(transform.position, dropoffPoint.position) < pointRadius)
                     Wait();
                 break;
             case ContactState.Waiting:
                 if (!recieving && GetComponent<Inventory>().IsEmpty())
+                {
                     Leave();
+                    GameObject.Find("Radio").GetComponent<RadioHints>().OnPickup();
+                }
                 GameObject player = GameObject.Find("Player");
                 float distance = Vector3.Distance(transform.position, player.transform.position);
                 if (triggeredFlag && distance < visibilityRadius)
