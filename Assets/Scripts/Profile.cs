@@ -65,11 +65,14 @@ public class Profile : MonoBehaviour {
 	}
 
 	//This should be called if the character is chosen as the contact
+	//To get the audio file from the <string1, string2>, do String1 + - + String2
+	//Right now, it will pull the unique-to-set, gender, one of the unique-to-sets
+	//But it will only pull additional properties in the same order each time
 	public Dictionary<string, string> ProvideHints(int Number) {
 		Dictionary<string, string> Hints = new Dictionary<string, string> ();
 		//Add the unique-to-set, plus the gender
 		Hints.Add ("Unique", Unique);
-		Hints.Add ("Gender", Gender);
+		Hints.Add ("Gender", Gender + Random.Range(1,6));
 		//Figure out possible unique-in-set
 		Dictionary<string, string> PossibleUniqueInSet = new Dictionary<string, string>();
 		if (FacialHairColourU)
@@ -165,6 +168,7 @@ public class Profile : MonoBehaviour {
 			Hints.Add (Candidate.Key, Candidate.Value);
 		}
 
+		//The first three should be chosen every time, but this is where it would be nice (TODO) to randomize the rest
 		Dictionary<string, string> FinalHints = new Dictionary<string, string> ();
 		int k = 0;
 		foreach (KeyValuePair<string, string> Hint in Hints) {
