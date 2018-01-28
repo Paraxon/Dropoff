@@ -2,3 +2,6 @@
 Assembly-CSharp.csproj
 Assembly-CSharp.csproj
 Assembly-CSharp-Editor-firstpass.csproj
+*.meta
+*.meta
+*.meta

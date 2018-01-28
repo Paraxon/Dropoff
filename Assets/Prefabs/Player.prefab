@@ -137,7 +137,12 @@ GameObject:
   - component: {fileID: 114562437673206810}
   - component: {fileID: 114355669309329142}
   - component: {fileID: 81068087398981306}
+<<<<<<< HEAD
   m_Layer: 0
+=======
+  - component: {fileID: 114386333077004082}
+  m_Layer: 2
+>>>>>>> f2693d1146dabb4c86dda6f09d34d32dddf09193
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1406,7 +1411,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1127526250361444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.788812, y: 11.5, z: 4.9758162}
+  m_LocalPosition: {x: 8, y: 11, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4684487515216680}
@@ -2567,6 +2572,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 4344440775639788}
   currentItem: {fileID: 0}
+--- !u!114 &114386333077004082
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1127526250361444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06054d79880f4e43ba5b07c2a40f477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heatGUI: {fileID: 0}
 --- !u!114 &114562437673206810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2578,13 +2595,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574e6c2618f267c479f45f64c3e37674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+=======
+  minHeat: 0
+  heatDecay: 1
+  maxHeat: 50
+  walkHeat: 1
+  runHeat: 5
+  jumpHeat: 7
+  idleHeat: 0.5
+  triggerHeat: 0
+  currentHeat: 0
+  heatDuration: 10
+  heatTimer: 0
+>>>>>>> f2693d1146dabb4c86dda6f09d34d32dddf09193
 --- !u!114 &114694322612513866
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1127526250361444}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 521b611700410be45810047f0a74e899, type: 3}
   m_Name: 

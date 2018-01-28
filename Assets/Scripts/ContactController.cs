@@ -144,6 +144,7 @@ public class ContactController : MonoBehaviour {
     {
         aiController.SetTarget(exitPoint);
         currentState = ContactState.Leaving;
+        player.GetComponent<ScoreCounter>().score++;
     }
 
     void Respond()
