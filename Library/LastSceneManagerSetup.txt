@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/James Sandbox.unity
+- path: Assets/Scenes/RyanB.unity
   isLoaded: 1
   isActive: 1

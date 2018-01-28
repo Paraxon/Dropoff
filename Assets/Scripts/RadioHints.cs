@@ -19,7 +19,7 @@ public class RadioHints : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		contact = GameObject.Find("Contact");
+        contact = GameObject.Find("Contact");
 
 		GameObject[] hintGivers = new GameObject[GameObject.FindGameObjectsWithTag ("HintGiver").Length];
 		int i = 0;
@@ -28,6 +28,7 @@ public class RadioHints : MonoBehaviour {
 			i++;
 		}
 		SetHintGivers (hintGivers, contact.GetComponent<Profile>().GetHints());
+
 	}
 	
 	// Update is called once per frame
