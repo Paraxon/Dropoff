@@ -45,6 +45,45 @@ public class Profile : MonoBehaviour {
 	private string BunColour = null;
 	private bool BunColourU = false;
 
+    private void Reset()
+    {
+    Unique = null;
+    Gender = null;
+    Glasses = false;
+    FacialHairColour = null;
+    FacialHairColourU = false;
+    HairColour = null;
+    HairColourU = false;
+    JacketColour = null;
+    JacketColourU = false;
+    ShirtColour = null;
+    ShirtColourU = false;
+    VestColour = null;
+    VestColourU = false;
+    PantsColour = null;
+    PantsColourU = false;
+    ShortsColour = null;
+    ShortsColourU = false;
+    HatColour = null;
+    HatColourU = false;
+    SuspendersColour = null;
+    SuspendersColourU = false;
+    HeadphonesColour = null;
+    HeadphonesColourU = false;
+    DressColour = null;
+    DressColourU = false;
+    SkirtColour = null;
+    SkirtColourU = false;
+    ApronColour = null;
+    ApronColourU = false;
+    DogColour = null;
+    DogColourU = false;
+    CondimentColour = null;
+    CondimentColourU = false;
+    BunColour = null;
+    BunColourU = false;
+}
+
 	//Finds Character type and version based on the name of the active child and the mesh
 	private void GetCharacterTypeVersion() {
 		foreach (SkinnedMeshRenderer Mesh in GetComponentsInChildren<SkinnedMeshRenderer>()) {
@@ -672,14 +711,27 @@ public class Profile : MonoBehaviour {
 		
 	// Use this for initialization
 	void Start () {
-		GetCharacterTypeVersion ();
-		SetCharacterProfile ();
-		//DebugLogHints(ProvideHints (5));
-
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    public string[] GetHints()
+    {
+        Reset();
+        GetCharacterTypeVersion();
+        SetCharacterProfile();
+        ProvideHints(5);
+        string[] hints = new string[5];
+        int i = 0;
+        foreach (KeyValuePair<string, string> hint in ProvideHints(5))
+        {
+            hints[i] = hint.Key + "-" + hint.Value;
+            i++;
+        }
+        return hints;
+    }
 }

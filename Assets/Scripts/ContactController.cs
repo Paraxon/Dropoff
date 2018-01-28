@@ -29,12 +29,7 @@ public class ContactController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Transform spawn = GetSpawn();
-        transform.SetPositionAndRotation(spawn.position, spawn.rotation);
-        dropoffPoint = GetDrop();
-        exitPoint = GetSpawn();
-        GetComponent<AICharacterControl>().SetTarget(dropoffPoint);
-        currentState = ContactState.Arriving;
+        Respawn();
 	}
 	
 	// Update is called once per frame
@@ -42,64 +37,94 @@ public class ContactController : MonoBehaviour {
         switch (currentState)
         {
             case ContactState.Arriving:
+                if (!recieving && GetComponent<Inventory>().IsEmpty())
+                    Leave();
                 if (Vector3.Distance(transform.position, dropoffPoint.position) < pointRadius)
-                {
-                    currentState = ContactState.Waiting;
-                }
+                    Wait();
                 break;
             case ContactState.Waiting:
-                stateTimer = maxTime;
+                if (!recieving && GetComponent<Inventory>().IsEmpty())
+                    Leave();
                 GameObject player = GameObject.Find("Player");
                 float distance = Vector3.Distance(transform.position, player.transform.position);
                 if (triggeredFlag && distance < visibilityRadius)
-                {
-                    currentState = ContactState.Triggered;
-                    triggeredFlag = false;
-                }
+                    Alert();
                 break;
             case ContactState.Triggered:
                 if (recieving)
                 {
                     stateTimer -= Time.deltaTime;
                     if (stateTimer <= 0)
-                        currentState = ContactState.Waiting;
+                        Wait();
                     if (Vector3.Distance(transform.position, package.transform.position) < visibilityRadius)
-                    {
-                        GetComponent<AICharacterControl>().SetTarget(package.transform);
-                        currentState = ContactState.PickingUp;
-                    }
+                        PickUp();
                 }
                 else
                 {
                     GetComponent<Inventory>().DropItem();
-                    GetComponent<AICharacterControl>().SetTarget(exitPoint);
-                    currentState = ContactState.Leaving;
+                    Leave();
                 }
                 break;
             case ContactState.PickingUp:
                 if (Vector3.Distance(transform.position, package.transform.position) < pickupRadius)
                 {
                     GetComponent<Inventory>().PickUp(package);
-                    GetComponent<AICharacterControl>().SetTarget(exitPoint);
-                    currentState = ContactState.Leaving;
+                    Leave();
                 }
                 break;
             case ContactState.Leaving:
                 if (Vector3.Distance(transform.position, exitPoint.position) < pointRadius)
                 {
-                    ShuffleCostume();
-                    Transform spawn = GetSpawn();
-                    transform.SetPositionAndRotation(spawn.position, spawn.rotation);
-                    dropoffPoint = GetDrop();
-                    exitPoint = GetSpawn();
-                    GetComponent<AICharacterControl>().SetTarget(dropoffPoint);
-                    recieving = !recieving;
-                    currentState = ContactState.Arriving;
+                    ToggleRecieving();
+                    Respawn();
                 }
                 break;
             default:
                 break;
         }
+    }
+
+    private void Respawn()
+    {
+        ShuffleCostume();
+        GameObject.Find("Radio").GetComponent<RadioHints>().Reset();
+
+        Transform spawn = GetSpawn();
+        transform.SetPositionAndRotation(spawn.position, spawn.rotation);
+        dropoffPoint = GetDrop();
+        exitPoint = GetSpawn();
+
+        GetComponent<AICharacterControl>().SetTarget(dropoffPoint);
+        currentState = ContactState.Arriving;
+    }
+
+    private void ToggleRecieving()
+    {
+        recieving = !recieving;
+    }
+
+    private void PickUp()
+    {
+        GetComponent<AICharacterControl>().SetTarget(package.transform);
+        currentState = ContactState.PickingUp;
+    }
+
+    private void Alert()
+    {
+        currentState = ContactState.Triggered;
+        triggeredFlag = false;
+    }
+
+    private void Wait()
+    {
+        stateTimer = maxTime;
+        currentState = ContactState.Waiting;
+    }
+
+    private void Leave()
+    {
+        GetComponent<AICharacterControl>().SetTarget(exitPoint);
+        currentState = ContactState.Leaving;
     }
 
     public Transform GetDrop()
@@ -128,10 +153,5 @@ public class ContactController : MonoBehaviour {
     void Respond()
     {
         Debug.Log("Contact responds!");
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-
     }
 }
