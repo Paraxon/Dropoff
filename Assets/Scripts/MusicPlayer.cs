@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour {
 
+
+
 	public AudioSource[] ThreatSources = new AudioSource[4];
 	public PlayerController Player;
 	//TODO Probably some kinda time delta time would be better...
@@ -28,13 +30,13 @@ public class MusicPlayer : MonoBehaviour {
 				//No need to change
 				ThreatState[i] = 0;
 			}
-			i++;
 		}
 	}
 
 	public void CheckThreat(float Threat) {
 		//This should allow for threat level changes
 		//Transition points are 25%, 50%, 75%, 100%
+
 		if (CurrentThreat < 25 && Threat >= 25) {
 			//Increasing from 0 to 1
 			Debug.Log("Threat increasing to low");
@@ -59,24 +61,11 @@ public class MusicPlayer : MonoBehaviour {
 			ThreatState[3] = 1;
 		}
 		if (CurrentThreat >= 100 && Threat < 100) {
-			//Decrease from 4 to 3 (shouldn't happen)
-			ThreatState[3] = -1;
-		}
-		if (CurrentThreat >= 75 && Threat < 75) {
-			//Decrease from 3 to 2
-			ThreatState[2] = -1;
-		}
-		if (CurrentThreat >= 50 && Threat < 50) {
-			//Decrease from 2 to 1
-			ThreatState[1] = -1;
-		}
-		if (CurrentThreat >= 25 && Threat < 25) {
-			//Decrease from 1 to 0
-			ThreatState[0] = -1;
+				ThreatState[0] = -1;
 		}
 		CurrentThreat = Threat;
-
 	}
+
 
 	// Use this for initialization
 	void Start () {
@@ -97,10 +86,15 @@ public class MusicPlayer : MonoBehaviour {
 			float NewThreat = CurrentThreat + AutoIncrement;
 			CheckThreat (NewThreat);
 		}
+<<<<<<< HEAD
 //		if (Player.maxHeat != 0) {
 //			CheckThreat(Player.currentHeat / Player.maxHeat * 100f);
 //		}
+=======
+		if (Player.maxHeat != 0) {
+			CheckThreat (Player.currentHeat / Player.maxHeat * 100f);
+		}
+>>>>>>> 26cf48eb8edae9d996df30223679d4a58b670daf
 		ChangeVolume ();
-
 	}
 }
