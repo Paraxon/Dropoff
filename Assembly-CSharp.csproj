@@ -51,13 +51,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
      <Compile Include="Assets\Scripts\Actor.cs" />
      <Compile Include="Assets\Scripts\BystanderController.cs" />
+=======
+<<<<<<< HEAD
+=======
+     <Compile Include="Assets\BystanderController.cs" />
+>>>>>>> b672554bbef78753ac48ff25592dcd53cfae8bbf
+     <Compile Include="Assets\RadioHints.cs" />
+>>>>>>> a36093564ae7e712c339f1604586a22e899f5620
      <Compile Include="Assets\Scripts\ContactController.cs" />
      <Compile Include="Assets\Scripts\CostumeSource.cs" />
      <Compile Include="Assets\Scripts\HintGiver.cs" />
      <Compile Include="Assets\Scripts\HintManager.cs" />
      <Compile Include="Assets\Scripts\Inventory.cs" />
+     <Compile Include="Assets\Scripts\MusicPlayer.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Police.cs" />
      <Compile Include="Assets\Scripts\Profile.cs" />
