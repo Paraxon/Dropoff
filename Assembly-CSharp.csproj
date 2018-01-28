@@ -51,12 +51,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Prefabs\Equipment.cs" />
-     <Compile Include="Assets\Scripts\Contact.cs" />
-     <Compile Include="Assets\Scripts\Equip.cs" />
+     <Compile Include="Assets\Scripts\ContactController.cs" />
+     <Compile Include="Assets\Scripts\CostumeSource.cs" />
      <Compile Include="Assets\Scripts\HintGiver.cs" />
      <Compile Include="Assets\Scripts\HintManager.cs" />
-     <Compile Include="Assets\Scripts\Interactive.cs" />
+     <Compile Include="Assets\Scripts\Inventory.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Police.cs" />
      <Compile Include="Assets\Scripts\Profile.cs" />
