@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class HintGiver : MonoBehaviour {
 
-	public KeyValuePair<string, string> HeldHint = new KeyValuePair<string, string>();
+	public string HeldHint = "";
 
-	public void ReceiveHint(KeyValuePair<string, string> Hint) {
+	public void ReceiveHint(string Hint) {
 		HeldHint = Hint;
-		gameObject.AddComponent<AudioSource> ();
-		GetComponent<AudioSource> ().clip = Resources.Load ("Audio/Hints/" + HeldHint.Key + "-" + HeldHint.Value) as AudioClip;
+		GetComponent<AudioSource> ().clip = Resources.Load ("Audio/Hints/" + HeldHint) as AudioClip;
+	}
+
+	public void OnTriggerEnter(Collider collider) {
+		if (collider.gameObject.name == "Player")
+			GiveHint ();
 	}
 
 	public void GiveHint() {
 		//Something needs to trigger this
-		GetComponent<AudioSource> ().Play ();
-		Debug.Log ("Telling player " + HeldHint.Key + " = " + HeldHint.Value);
+		if (HeldHint != "") {
+			GetComponent<AudioSource> ().Play ();
+			Debug.Log ("Telling player " + HeldHint);
+		}
 	}
 
 	// Use this for initialization
