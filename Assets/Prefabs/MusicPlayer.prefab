@@ -384,6 +384,7 @@ MonoBehaviour:
   - {fileID: 82192924461849416}
   - {fileID: 82903326513505822}
   - {fileID: 82896140774827098}
+  Player: {fileID: 0}
   VolumeIncrement: 0.01
   CurrentThreat: 0
   AutoIncrement: 0.1
