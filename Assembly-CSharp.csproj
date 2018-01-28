@@ -62,7 +62,7 @@
      <Compile Include="Assets\Scripts\Inventory.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\Police.cs" />
+     <Compile Include="Assets\Scripts\PoliceController.cs" />
      <Compile Include="Assets\Scripts\Profile.cs" />
      <Compile Include="Assets\Scripts\RadioHints.cs" />
      <Compile Include="Assets\Scripts\SoundOnStep.cs" />
