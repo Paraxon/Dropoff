@@ -5,6 +5,7 @@ using UnityEngine;
 public class MusicPlayer : MonoBehaviour {
 
 	public AudioSource[] ThreatSources = new AudioSource[4];
+	public PlayerController Player;
 	//TODO Probably some kinda time delta time would be better...
 	public float VolumeIncrement = 0.01f;
 	//Corresponding to above sources, 0 means no change, -1 means decreasing, 1 means increasing
@@ -80,7 +81,7 @@ public class MusicPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//As we start, all tracks are silent
-
+		Player = GameObject.Find("Player").GetComponent<PlayerController>();
 	}
 	
 	// Update is called once per frame
@@ -96,6 +97,9 @@ public class MusicPlayer : MonoBehaviour {
 			float NewThreat = CurrentThreat + AutoIncrement;
 			CheckThreat (NewThreat);
 		}
+//		if (Player.maxHeat != 0) {
+//			CheckThreat(Player.currentHeat / Player.maxHeat * 100f);
+//		}
 		ChangeVolume ();
 
 	}

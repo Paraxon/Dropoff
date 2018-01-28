@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1487474399170878}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 41.781708, y: 0.10550167, z: -12.697021}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,7 +52,8 @@ AudioSource:
   m_GameObject: {fileID: 1487474399170878}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243583236008172640, guid: a388675914fad418eb76246c0530cf64,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 9d72e7e00a9c3452189d781476a7db98, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
@@ -111,7 +112,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -132,7 +133,8 @@ AudioSource:
   m_GameObject: {fileID: 1487474399170878}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243583236008172640, guid: a388675914fad418eb76246c0530cf64,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 1c4613a9ea8b8444495db93cf79b356e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
@@ -191,7 +193,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -212,7 +214,8 @@ AudioSource:
   m_GameObject: {fileID: 1487474399170878}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243583236008172640, guid: a388675914fad418eb76246c0530cf64,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 82ee95809ade54794a4f8ebd8b91575b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
@@ -271,7 +274,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -292,7 +295,8 @@ AudioSource:
   m_GameObject: {fileID: 1487474399170878}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243583236008172640, guid: a388675914fad418eb76246c0530cf64,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 555f8fd51e89b4dfcb67e43b4c3cfde3, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
@@ -351,7 +355,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -380,6 +384,7 @@ MonoBehaviour:
   - {fileID: 82192924461849416}
   - {fileID: 82903326513505822}
   - {fileID: 82896140774827098}
+  Player: {fileID: 0}
   VolumeIncrement: 0.01
   CurrentThreat: 0
   AutoIncrement: 0.1
